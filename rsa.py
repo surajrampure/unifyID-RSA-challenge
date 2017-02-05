@@ -93,9 +93,17 @@ def getPrivateKey(px, qx, e):
     (a, b, d) = egcd(nx, e)
     return d % nx
 
+def encrypt(x, e, N):
+    return x**e % N
+
+def decrypt(y, d, N):
+    return y**d % N
+
 # Implementation ----
 (p, q) = findPQ()
 (N, e) = getPublicKey(p, q)
 d = getPrivateKey(p-1, q-1, e)
 print("Public key (N, e): ({0}, {1})".format(N, e))
 print("Private key d: {0}".format(d))
+
+# Note that decrypt(encrypt(x, e, N), d, N) == x
